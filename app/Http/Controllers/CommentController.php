@@ -2,7 +2,9 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\CommentRequest;
 use App\Models\Comment;
+use App\Models\Post;
 use Illuminate\Http\Request;
 
 class CommentController extends Controller
@@ -12,8 +14,7 @@ class CommentController extends Controller
      */
     public function index()
     {
-        $comments = Comment::paginate(10);
-        return view('comment.index', ["comments" => $comments, "pageTitle" => "Comment"]);
+        return redirect('/blog');
     }
 
     /**
@@ -21,15 +22,21 @@ class CommentController extends Controller
      */
     public function create()
     {
-        return view('comment.create', ["pageTitle" => "Creating new Comment"]);
+        return redirect('/blog');
     }
 
     /**
      * Store a newly created resource in storage.
      */
-    public function store(Request $request)
+    public function store(CommentRequest $request)
     {
-        //
+        $post = Post::findOrFail($request->input('post_id'));
+        $comment = new Comment();
+        $comment->author = $request->input('author');
+        $comment->content = $request->input('content');
+        $comment->post_id = $request->input('post_id');
+        $comment->save();
+        return redirect("/blog/{$post->id}")->with('success' , 'Content add successfully!');
     }
 
     /**
@@ -37,8 +44,7 @@ class CommentController extends Controller
      */
     public function show(string $id)
     {
-        $comments = Comment::find($id);
-        return view('comment.show', ["comments" => $comments, "pageTitle" => "View Comment"]);
+        return redirect('/blog');
     }
 
     /**
@@ -46,8 +52,7 @@ class CommentController extends Controller
      */
     public function edit(string $id)
     {
-        $comments = Comment::find($id);
-        return view('comment.edit', ["comments" => $comments, "pageTitle" => "Edit Comment"]);
+        //
     }
 
     /**
