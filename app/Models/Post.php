@@ -10,14 +10,17 @@ use Illuminate\Database\Eloquent\Model;
 class Post extends Model
 {
     use HasFactory;
-    
+
     use HasUuids;
     protected $primaryKey = 'id';
     protected $keyType = 'string';
     public $incrementing = false;
-    protected $fillable = ['title', 'body', 'author', 'published'];
+    protected $fillable = ['title', 'body', 'author', 'published', 'user_id'];
 
     protected $guarded = ['id'];
+    public function user(){
+        return $this->belongsTo(User::class);
+    }
     public function comments()
     {
         return $this->hasMany(Comment::class);

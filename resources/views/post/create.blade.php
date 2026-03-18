@@ -6,24 +6,13 @@
                 <h2 class="text-base/7 font-semibold text-gray-900">Create New Post</h2>
                 <p class="mt-1 text-sm/6 text-gray-400">Use this form to add a new post to the blog.</p>
                 <div class="mt-10 grid grid-cols-1 gap-x-6 gap-y-8 sm:grid-cols-6">
-                    <div class="sm:col-span-3">
+                    <div class="sm:col-span-full">
                         <label for="title" class="block text-sm/6 font-medium text-gray-900">Title</label>
                         <div class="mt-2">
                             <input id="title" value="{{ old('title') }}" type="text" name="title" autocomplete="given-name"
                                 class="{{ $errors->has('title') ? 'outline-red-500 focus:outline-red-600' : 'outline-gray-500' }}block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 placeholder:text-white-500 focus:outline-indigo-500 focus:outline-2 focus:-outline-offset-2 sm:text-sm" />
                         </div>
                         @error('title')
-                            <span class="text-red-500">{{ $message }}</span>
-                        @enderror
-                    </div>
-
-                    <div class="sm:col-span-3">
-                        <label for="author" class="block text-sm/6 font-medium text-gray-900">Author</label>
-                        <div class="mt-2">
-                            <input id="author" value="{{ old('author') }}" type="text" name="author" autocomplete="family-name"
-                               class="{{ $errors->has('author') ? 'outline-red-500 focus:outline-red-600' : 'outline-gray-500' }}block w-full rounded-md bg-white px-3 py-1.5 text-base text-gray-900 outline-1 -outline-offset-1 placeholder:text-white-500 focus:outline-indigo-500 focus:outline-2 focus:-outline-offset-2 sm:text-sm"/>
-                        </div>
-                        @error('author')
                             <span class="text-red-500">{{ $message }}</span>
                         @enderror
                     </div>
